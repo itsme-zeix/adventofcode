@@ -69,7 +69,6 @@ def compute_max_clique(adj_matrix):
 
   return helper([], list(range(len(adj_matrix))))
 
-
 if __name__ == "__main__":
   print(solve_part1())
   print(solve_part2())

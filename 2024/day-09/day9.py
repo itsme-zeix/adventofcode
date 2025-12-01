@@ -11,7 +11,7 @@ def solve_part1():
     files.extend([character] * repeats)
 
   total = 0
-  i, j = 0, len(files) - 1
+  i, j = 0, len(files) -1
   while i < len(files):
     if files[i] != ".":
       i += 1

@@ -1,3 +1,7 @@
-Welcome to my Advent of Code 2024 repository! 🎄✨ This collection contains my solutions to the daily coding challenges of AOC 2024.
+Welcome to my Advent Of Code repo!
 
-The solutions were primarily implemented in Python. Some solutions were also translated into Go to learn and explore more about the syntax in Go!
+| Year | Language             | Stars
+| ---- |--------------------- | ------
+| 2024 | Python, Go           | 50⭐
+| 2025 | WIP                  | WIP
+

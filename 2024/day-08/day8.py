@@ -12,7 +12,6 @@ def process_input():
           antenna_mappings[antenna].append((x, y))
         else:
           antenna_mappings[antenna] = [(x, y)]
-
     return matrix, antenna_mappings
 
 def is_within_bounds(x, y):

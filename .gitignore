@@ -1,2 +1,11 @@
 *.txt
-venv/*
+*input*
+
+venv/
+.env/
+__pycache__/
+*.pyc
+*.exe
+*.out
+
+.DS_Store

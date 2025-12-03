@@ -1,11 +1,9 @@
-use std::fs;
 use std::time::Instant;
 
-fn read_input(path: &str) -> Vec<(char, i16)> {
-    let input = fs::read_to_string(path)
-        .expect("failed to read input file");
+const INPUT: &str = include_str!("input.txt");
 
-    input.lines()
+fn parse_input() -> Vec<(char, i16)> {
+    INPUT.lines()
         .map(|s| {
             let (a, b) = s.split_at(1);
             let dir = a.chars().next().expect("empty line");
@@ -40,7 +38,7 @@ fn day02(input: &[(char, i16)]) -> i16 {
     let mut state: i16 = 50;
     let mut res: i16 = 0;
 
-    for (dir, mut dist) in input {
+    for &(ref dir, mut dist) in input {
         let full_rotations = dist / 100;
         dist %= 100;
         res += full_rotations;
@@ -66,7 +64,7 @@ fn day02(input: &[(char, i16)]) -> i16 {
 
 fn main() {
     let t = Instant::now();
-    let input = read_input("input.txt");
+    let input = parse_input();
     println!("read_input ({:?})", t.elapsed());
 
     let t = Instant::now();

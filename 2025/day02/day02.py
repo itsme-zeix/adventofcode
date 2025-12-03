@@ -3,7 +3,7 @@ from time import perf_counter_ns
 
 # For parallelization
 import os
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 
 def timeit(f):
     def wrap(*args, **kwargs):
@@ -104,7 +104,7 @@ def part2_par_worker(l: int, r: int) -> int:
     return local_sum
 
 @timeit
-def part1_par(input: list[tuple[int, int]]) -> int:
+def part1_par_procs(input: list[tuple[int, int]]) -> int:
     num_workers = os.cpu_count() or 1
     with ProcessPoolExecutor(max_workers=num_workers) as executor:
         # should probably load balance the work as some ranges can be larger than others
@@ -112,13 +112,28 @@ def part1_par(input: list[tuple[int, int]]) -> int:
         return sum(f.result() for f in futures)
 
 @timeit
-def part2_par(input: list[tuple[int, int]]) -> int:
+def part2_par_procs(input: list[tuple[int, int]]) -> int:
     num_workers = os.cpu_count() or 1
     with ProcessPoolExecutor(max_workers=num_workers) as executor:
         # should probably load balance the work as some ranges can be larger than others
         futures = [executor.submit(part2_par_worker, l, r) for (l, r) in input]
         return sum(f.result() for f in futures)
 
+@timeit
+def part1_par_threads(input: list[tuple[int, int]]) -> int:
+    num_workers = os.cpu_count() or 1
+    with ThreadPoolExecutor(max_workers=num_workers) as executor:
+        # should probably load balance the work as some ranges can be larger than others
+        futures = [executor.submit(part1_par_worker, l, r) for (l, r) in input]
+        return sum(f.result() for f in futures)
+
+@timeit
+def part2_par_threads(input: list[tuple[int, int]]) -> int:
+    num_workers = os.cpu_count() or 1
+    with ThreadPoolExecutor(max_workers=num_workers) as executor:
+        # should probably load balance the work as some ranges can be larger than others
+        futures = [executor.submit(part2_par_worker, l, r) for (l, r) in input]
+        return sum(f.result() for f in futures)
 
 if __name__ == "__main__":
     input = read_input("input.txt")
@@ -129,5 +144,9 @@ if __name__ == "__main__":
     print(part2(input))
 
     # Parallel
-    print(part1_par(input))
-    print(part2_par(input))
+    print(part1_par_procs(input))
+    print(part2_par_procs(input))
+
+    # Parallel Threads
+    print(part1_par_threads(input))
+    print(part2_par_threads(input))

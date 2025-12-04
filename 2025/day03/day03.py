@@ -1,10 +1,6 @@
 from typing import Optional
 from time import perf_counter_ns
 
-# Parallelisation
-import os
-from concurrent.futures import ProcessPoolExecutor
-
 
 def timeit(f):
     def wrap(*args, **kwargs):
